@@ -145,8 +145,8 @@ section h2 {
 
 .hero-photo {
   flex: 0 0 auto;
-  width: 176px;
-  height: 176px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--line);
@@ -1003,8 +1003,8 @@ body.lightbox-open {
     gap: 28px;
   }
   .hero-photo {
-    width: 128px;
-    height: 128px;
+    width: 150px;
+    height: 150px;
   }
   .hero-text h1 {
     font-size: 38px;
