@@ -30,7 +30,7 @@ function buildProjectGallery() {
   });
 
   const text = section.querySelector('.project-text');
-  const back = section.querySelector('.back-link');
+  const back = section.querySelector('.back-link:not(.back-link-top)');
   section.querySelectorAll('.project-images').forEach(el => el.remove());
   figures.forEach(f => f.remove());
 
@@ -206,3 +206,69 @@ function buildProjectGallery() {
 }
 
 buildProjectGallery();
+
+// Stats strip: count numbers up once when the strip scrolls into view.
+// The HTML already holds the final values, so nothing changes without JS
+// or when the visitor prefers reduced motion.
+function animateStats() {
+  const values = document.querySelectorAll('.stat-value[data-count]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!values.length || reduceMotion || !('IntersectionObserver' in window)) return;
+
+  values.forEach(el => { el.textContent = '0'; });
+
+  const countUp = el => {
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 900;
+    const start = performance.now();
+    const step = now => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    // animation frames can stall (e.g. background tabs); always land on the real value
+    setTimeout(() => { el.textContent = target; }, duration + 100);
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      countUp(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.6 });
+
+  values.forEach(el => observer.observe(el));
+}
+
+animateStats();
+
+// Hero video: only reveal it once the file has actually loaded, so the hero
+// looks unchanged while images/hero.mp4 doesn't exist. With reduced motion,
+// keep it paused so only the poster image shows.
+function setupHeroVideo() {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+  const media = video.closest('.hero-media');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reduceMotion) {
+    // swap the video for its poster image entirely
+    const poster = document.createElement('img');
+    poster.src = video.getAttribute('poster');
+    poster.alt = '';
+    poster.className = 'hero-video';
+    poster.addEventListener('load', () => media.classList.add('is-ready'), { once: true });
+    video.pause();
+    video.replaceWith(poster);
+    return;
+  }
+
+  const reveal = () => media.classList.add('is-ready');
+  video.addEventListener('loadedmetadata', reveal, { once: true });
+  if (video.readyState >= 1) reveal();
+}
+
+setupHeroVideo();

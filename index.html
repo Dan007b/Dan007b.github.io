@@ -40,13 +40,38 @@
         <a href="resume.html" class="btn btn-outline">Resume</a>
       </div>
     </div>
+    <!-- Hero video: stays hidden until images/hero.mp4 (or .webm) actually loads -->
+    <div class="hero-media">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+             poster="images/hero-poster.jpg" aria-hidden="true">
+        <source src="images/hero.webm" type="video/webm">
+        <source src="images/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="wrap">
+    <div class="stats" aria-label="Highlights">
+      <div class="stat">
+        <span class="stat-value">1st</span>
+        <span class="stat-label">Sumo, RC Classic</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" data-count="20">20</span>
+        <span class="stat-label">Bikes repaired &amp; given away</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" data-count="9">9</span>
+        <span class="stat-label">Projects built</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
-    <p class="eyebrow">01 / About</p>
     <h2>About me</h2>
     <div class="about-content">
       <div class="about-text">
@@ -73,23 +98,28 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="wrap">
-    <p class="eyebrow">02 / Work</p>
     <h2>Projects</h2>
 
+    <a href="projects/midi-pedalboard.html" class="featured">
+      <div class="featured-media">
+        <img src="images/midi-pedalboard-1.jpg" alt="ESP32-S3 MIDI pedalboard with five footswitches">
+      </div>
+      <div class="featured-body">
+        <p class="featured-label">Latest project</p>
+        <h3>ESP32-S3 MIDI Pedalboard</h3>
+        <p>A five-switch USB MIDI foot controller for recording guitar hands-free. It shows up in any DAW as
+          a class-compliant MIDI device, with custom TinyUSB firmware, latching switches with status LEDs,
+          and an aluminum enclosure I designed and built.</p>
+        <ul class="featured-specs">
+          <li>ESP32-S3</li><li>USB MIDI</li><li>C++ / PlatformIO</li><li>KiCad</li>
+        </ul>
+        <span class="btn">View project</span>
+      </div>
+    </a>
+
     <div class="project-grid">
-
-      <a href="projects/MIDI Pedalboard.html" class="card">
-        <div class="card-media"><img src="images/MIDI pedalboard 1.jpg" alt="ESP32-S3 MIDI pedalboard"></div>
-        <div class="card-body">
-          <p class="card-meta">ESP32-S3 · USB MIDI</p>
-          <h3>MIDI Pedalboard</h3>
-          <p>Five-switch USB MIDI foot controller for recording guitar, with custom TinyUSB firmware.</p>
-          <span class="card-link">View project →</span>
-        </div>
-      </a>
-
-      <a href="projects/ELEX 2120 RC Car.html" class="card">
-        <div class="card-media"><img src="images/ELEX 2120 car.jpg" alt="RC car for ELEX 2120"></div>
+      <a href="projects/elex-2120-rc-car.html" class="card">
+        <div class="card-media"><img src="images/elex-2120-car.jpg" alt="RC car for ELEX 2120"></div>
         <div class="card-body">
           <p class="card-meta">Course project · BCIT</p>
           <h3>RC Car for ELEX 2120</h3>
@@ -98,8 +128,8 @@
         </div>
       </a>
 
-      <a href="projects/RC Classic.html" class="card">
-        <div class="card-media"><img src="images/RC Classic.jpg" alt="RC Classic car"></div>
+      <a href="projects/rc-classic.html" class="card">
+        <div class="card-media"><img src="images/rc-classic.jpg" alt="RC Classic car"></div>
         <div class="card-body">
           <p class="card-meta">Competition · BCIT</p>
           <h3>RC Classic</h3>
@@ -108,8 +138,8 @@
         </div>
       </a>
 
-      <a href="projects/WEC 2026.html" class="card">
-        <div class="card-media"><img src="images/WEC 2.jpg" alt="Western Engineering Competition 2026"></div>
+      <a href="projects/wec-2026.html" class="card">
+        <div class="card-media"><img src="images/wec-2.jpg" alt="Western Engineering Competition 2026"></div>
         <div class="card-body">
           <p class="card-meta">Competition · 2026</p>
           <h3>Western Engineering Competition 2026</h3>
@@ -118,8 +148,8 @@
         </div>
       </a>
 
-      <a href="projects/Airplane.html" class="card">
-        <div class="card-media"><img src="images/plane pic.JPG" alt="Remote controlled airplane"></div>
+      <a href="projects/airplane.html" class="card">
+        <div class="card-media"><img src="images/plane-pic.jpg" alt="Remote controlled airplane"></div>
         <div class="card-body">
           <p class="card-meta">Capstone · Aerodynamics</p>
           <h3>RC Airplane</h3>
@@ -128,8 +158,8 @@
         </div>
       </a>
 
-      <a href="projects/Bike tool holder.html" class="card">
-        <div class="card-media"><img src="images/bike tool holder 1.png" alt="Bike tool holder"></div>
+      <a href="projects/bike-tool-holder.html" class="card">
+        <div class="card-media"><img src="images/bike-tool-holder-1.png" alt="Bike tool holder"></div>
         <div class="card-body">
           <p class="card-meta">Fusion 360 · CNC plasma</p>
           <h3>Bike Tool Holder</h3>
@@ -138,8 +168,8 @@
         </div>
       </a>
 
-      <a href="projects/FIRST Robotics.html" class="card">
-        <div class="card-media"><img src="images/FIRST Robotics 1.jpg" alt="FIRST Robotics robot"></div>
+      <a href="projects/first-robotics.html" class="card">
+        <div class="card-media"><img src="images/first-robotics-1.jpg" alt="FIRST Robotics robot"></div>
         <div class="card-body">
           <p class="card-meta">Robotics · Team 7688</p>
           <h3>FIRST Robotics Competition</h3>
@@ -148,8 +178,8 @@
         </div>
       </a>
 
-      <a href="projects/Bike fixing club.html" class="card">
-        <div class="card-media"><img src="images/bike club 1.jpg" alt="Bike Fixing Club"></div>
+      <a href="projects/bike-fixing-club.html" class="card">
+        <div class="card-media"><img src="images/bike-club-1.jpg" alt="Bike Fixing Club"></div>
         <div class="card-body">
           <p class="card-meta">Community · Leadership</p>
           <h3>Bike Fixing Club</h3>
@@ -158,8 +188,8 @@
         </div>
       </a>
 
-      <a href="projects/HAAS CNC Fidget Spinnner.html" class="card">
-        <div class="card-media"><img src="images/HAAS spinner 1.jpg" alt="CNC machined fidget spinner"></div>
+      <a href="projects/haas-cnc-fidget-spinner.html" class="card">
+        <div class="card-media"><img src="images/haas-spinner-1.jpg" alt="CNC machined fidget spinner"></div>
         <div class="card-body">
           <p class="card-meta">CNC machining · CAM</p>
           <h3>HAAS CNC Fidget Spinner</h3>
@@ -175,8 +205,7 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
-    <p class="eyebrow">03 / Contact</p>
-    <h2>Get in touch</h2>
+    <h2>Contact</h2>
     <p class="contact-intro">
       Feel free to reach out by email or connect with me on LinkedIn or Instagram.
     </p>
