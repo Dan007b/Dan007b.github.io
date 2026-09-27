@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIDI Pedalboard | Danny Bosak</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <h1 class="logo"><a href="../index.html">Danny Bosak</a></h1>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+
+<main class="project-page container">
+  <section>
+    <h1>ESP32-S3 MIDI Pedalboard</h1>
+    <div class="project-images">
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/MIDI pedalboard 1.jpg" alt="Aluminum pedalboard with five footswitches and status LEDs">
+        <figcaption class="project-img-caption">The assembled pedalboard: five footswitches with a status LED for each</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/MIDI pedalboard 2.jpg" alt="Aluminum enclosure drilled with five holes">
+        <figcaption class="project-img-caption">Enclosure drilled for the footswitches</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/MIDI pedalboard 3.jpg" alt="ESP32-S3 board next to a perfboard">
+        <figcaption class="project-img-caption">ESP32-S3 DevKitC-1 and the perfboard carrier</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/MIDI pedalboard 4.jpg" alt="Perfboard with female headers soldered on">
+        <figcaption class="project-img-caption">Perfboard with headers for the ESP32-S3</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/MIDI pedalboard 5.jpg" alt="ESP32-S3 mounted on the perfboard">
+        <figcaption class="project-img-caption">ESP32-S3 mounted on the carrier</figcaption>
+      </figure>
+    </div>
+    <div class="project-text">
+      <table class="spec-table">
+        <tr><th>Board</th><td>ESP32-S3 DevKitC-1 (N16R8)</td></tr>
+        <tr><th>Inputs</th><td>5 footswitches, 5 status LEDs</td></tr>
+        <tr><th>Connection</th><td>USB MIDI (class compliant, no drivers)</td></tr>
+        <tr><th>Firmware</th><td>C++, Arduino on PlatformIO, TinyUSB</td></tr>
+        <tr><th>Design</th><td>Enclosure drawing, KiCad schematic</td></tr>
+      </table>
+
+      <!-- Overview -->
+      <h2>Overview</h2>
+      <p>A five-switch foot controller for playing guitar with a computer. It plugs in over USB and shows
+        up as a MIDI device called "MIDI Pedalboard" in Windows and in a DAW, so each footswitch can
+        control recording, playback, or effects without taking my hands off the guitar.</p>
+
+      <!-- Hardware -->
+      <h2>Hardware</h2>
+      <p>The controller is built around an ESP32-S3, which has native USB. Each footswitch pulls a GPIO
+        pin to 3.3&nbsp;V using the chip's internal pull-downs, and each has an LED with a 220&nbsp;&Omega;
+        resistor to show whether it is on. I drew up the enclosure in millimetres, including the hole
+        sizes for the footswitches, and built it in an aluminum box with the board on a removable
+        perfboard carrier.</p>
+
+      <!-- Firmware -->
+      <h2>Firmware</h2>
+      <p>The firmware uses the TinyUSB stack built into the ESP32 core with a custom USB MIDI
+        descriptor, so no external libraries are needed. Each switch works as a latch: a press toggles
+        it on or off, sends a Control Change message (CC&nbsp;20&ndash;24 on channel&nbsp;1, value 127 or 0),
+        and updates its LED. Presses are debounced at 50&nbsp;ms. Because the board only needs to read
+        switches, I dropped the CPU to 40&nbsp;MHz and turned off Wi-Fi and Bluetooth.</p>
+
+      <!-- In use -->
+      <h2>Using It</h2>
+      <p>In Waveform Free I used MIDI learn to map the switches to transport controls. I also mapped one
+        switch to the space bar with MidiKey2Key, so it can start and stop playback in any program.</p>
+
+      <!-- Next steps -->
+      <h2>Next Steps</h2>
+      <p>The schematic is done in KiCad and I have started laying out a custom PCB to replace the
+        perfboard.</p>
+    </div>
+
+    <a class="back-link" href="../index.html">← Back</a>
+  </section>
+</main>
+
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELEX 2120 RC Car | Danny Bosak</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <h1 class="logo"><a href="../index.html">Danny Bosak</a></h1>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+
+<main class="project-page container">
+  <section>
+    <h1>RC Car for ELEX 2120</h1>
+    <div class="project-images">
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/ELEX 2120 car.jpg" alt="Red tank-drive RC car with a breadboard, microcontroller, and speaker on top">
+        <figcaption class="project-img-caption">The finished car driving on the floor</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <video class="project-img" src="../images/ELEX 2120 car.mp4" poster="../images/ELEX 2120 car poster.jpg" aria-label="The RC car driving on the floor"></video>
+        <figcaption class="project-img-caption">Driving test</figcaption>
+      </figure>
+    </div>
+    <div class="project-text">
+      <table class="spec-table">
+        <tr><th>Course</th><td>ELEX 2120, BCIT (Semester 2)</td></tr>
+        <tr><th>Drive</th><td>Tank drive: two large wheels and a caster</td></tr>
+        <tr><th>Electronics</th><td>H-bridge motor driver, breadboard, speaker</td></tr>
+        <tr><th>Control</th><td>Phone app built with RemoteXY</td></tr>
+      </table>
+
+      <!-- Overview -->
+      <h2>Overview</h2>
+      <p>This was a class project for ELEX 2120 at the end of my second semester at BCIT. The goal was
+        to build a remote controlled car and apply what we learned in class. The car
+        uses tank drive: two large wheels, each driven by its own motor, with a caster wheel for balance.
+        All of the electronics are wired on a breadboard mounted on top.</p>
+
+      <!-- Motor control -->
+      <h2>Motor Control</h2>
+      <p>I learned how to wire an H-bridge to drive the motors in both directions, and how to use PWM
+        to control their speed. Because each side is driven separately, the car steers by running the
+        wheels at different speeds or in opposite directions.</p>
+
+      <!-- Sound -->
+      <h2>Sound with PWM</h2>
+      <p>I also used PWM to drive a speaker. The car plays a different tone depending on which
+        direction it is moving, which was a fun way to see that the same technique used for motor
+        speed can also generate sound.</p>
+
+      <!-- Control -->
+      <h2>Remote Control</h2>
+      <p>The car is controlled from a phone using RemoteXY. I learned how to design the control
+        interface and connect it to the car's code, so the car responds to the on-screen controls.</p>
+    </div>
+
+    <a class="back-link" href="../index.html">← Back</a>
+  </section>
+</main>
+
+<script src="../script.js"></script>
+</body>
+</html>
