@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase Escape | Danny Bosak</title>
+  <link rel="stylesheet" href="../style.css?v=20260927">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <h1 class="logo"><a href="../index.html">Danny Bosak</a></h1>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+
+<main class="project-page container">
+  <section>
+    <a class="back-link back-link-top" href="../index.html#projects"><span aria-hidden="true">&larr;</span> Back to projects</a>
+    <h1>Phase Escape: StormHacks 2026</h1>
+    <div class="project-images">
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-curvature.png" alt="Marble in a hyperbolic maze after looping a pillar, the world tinted violet">
+        <figcaption class="project-img-caption">After one lap around a pillar, curved space has shifted the marble from red to violet</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-title.png" alt="Level 1 of Phase Escape">
+        <figcaption class="project-img-caption">Level 1: pentagonal rooms on the hyperbolic plane, drawn in the Poincar&eacute; disk</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-doors.png" alt="A coloured door blocking a passage">
+        <figcaption class="project-img-caption">Doors only open in their own colour</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-hunted.png" alt="A red hunter closing in on the marble">
+        <figcaption class="project-img-caption">A hunter can only see and hit you in its own colour, so you phase out to escape</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-rift.png" alt="Lining up a 4D plank over a rift">
+        <figcaption class="project-img-caption">Turning the 4D view until a plank's shadow lies flat and bridges a rift</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-shifter.png" alt="A shifter hunter about to change colour">
+        <figcaption class="project-img-caption">A shifter about to change colour</figcaption>
+      </figure>
+      <figure class="project-image-figure">
+        <img class="project-img" src="../images/phase-escape-final.png" alt="The final level with four hunters">
+        <figcaption class="project-img-caption">Level 9, Escape: four hunters and only one safe colour</figcaption>
+      </figure>
+    </div>
+    <div class="project-text">
+      <table class="spec-table">
+        <tr><th>Event</th><td>StormHacks 2026, &ldquo;Beyond Euclid: Interactive Experiences in Impossible Geometries&rdquo;</td></tr>
+        <tr><th>Game</th><td>TypeScript, Three.js, Vite, Web Audio; 143 automated tests</td></tr>
+        <tr><th>Controller</th><td>ESP32-DevKitC V4 + BNO055 orientation sensor, 4 &times; AA</td></tr>
+        <tr><th>Link</th><td>Bluetooth Low Energy or USB, 100&nbsp;Hz</td></tr>
+        <tr><th>Firmware</th><td>C++, Arduino on PlatformIO, NimBLE</td></tr>
+        <tr><th>Runs on</th><td>Chrome / Edge in the browser, or a Windows desktop app (Electron)</td></tr>
+      </table>
+
+      <!-- Overview -->
+      <h2>Overview</h2>
+      <p>The StormHacks challenge was to build an interactive experience where impossible geometry
+        isn't decoration, it has to change how you play. Phase Escape is a chase through a maze in
+        curved space with a fourth dimension. You are a marble rolling through pentagonal rooms on the
+        hyperbolic plane, and you can play it by tilting a wireless controller I built.</p>
+      <p>The maze has five layers, each with its own colour. Doors only open in their own colour,
+        shards can only be picked up in their own colour, and hunters can only see and hit you while
+        you are in their layer. When one closes in, you phase out. Collect every shard, reach the
+        portal, and don't get caught three times.</p>
+
+      <!-- Geometry -->
+      <h2>The Geometry Is the Game</h2>
+      <p>The rooms form a {5,4} tiling: pentagons with four meeting at every corner, which can't fit on
+        a flat floor. The four rooms around a pillar make a square with 72&deg; corners instead of
+        90&deg;, so rolling once around it turns you 108&deg; at each corner, 432&deg; in all. That
+        extra 72&deg; is <strong>holonomy</strong>, and it is exactly one of the five colour layers, so
+        space itself moves you through the fourth dimension. On some levels you can't change colour any
+        other way.</p>
+      <p>A tesseract in the corner is your view into the fourth dimension. Some passages are blocked by
+        rifts with a 4D plank above them; you only see its shadow, and turning your view in the XW and
+        YW planes slides it until it lies flat and becomes a bridge.</p>
+
+      <!-- Controller -->
+      <h2>The Controller</h2>
+      <p>The controller is an ESP32 with an Adafruit BNO055 orientation sensor, running on four AA
+        batteries. It streams gravity and gyro readings at 100&nbsp;Hz over Bluetooth Low Energy, or
+        over USB when plugged in. Tilting rolls the marble, turning it like a dial phases between
+        layers, and holding the BOOT button while tilting turns your 4D view. Calibration is saved in
+        flash so it is ready as soon as it powers on.</p>
+
+      <!-- Challenges -->
+      <h2>Challenges</h2>
+      <ul>
+        <li><strong>Fun before maths:</strong> the first version had you rotate a 4D key to fit a lock.
+          Playtesting showed it was vague and had no way to lose, so I rebuilt it as a chase with
+          hunters, lives and a timer.</li>
+        <li><strong>Making curvature fair:</strong> measuring the marble's wobbly path gave noisy
+          angles. Carrying your orientation from room centre to room centre makes every pillar lap
+          exactly 72&deg;, every time.</li>
+        <li><strong>Hardware:</strong> the sensor sometimes failed on first boot until I added a
+          clock-settle delay, and Bluetooth searches on Windows failed silently until I added a search
+          indicator, a timeout and a retry.</li>
+        <li><strong>Working with AI:</strong> I directed Claude Code, read what it wrote, and relied on
+          143 automated tests to catch mistakes, including a bug that froze the game when a hunter lost
+          sight of you.</li>
+      </ul>
+
+      <!-- Results -->
+      <h2>Results</h2>
+      <p>Nine levels, three with tutorial tips, running at 60&nbsp;FPS. A solver proves every level can
+        be finished, and an autopilot then plays each one start to finish with the real physics. Every
+        layer has its own chord in the live-synthesized music, so phasing changes the harmony.</p>
+
+      <!-- External Links -->
+      <h2>Links</h2>
+      <ul>
+        <li><a href="https://dannybosak.is-a.dev/phase-escape/" target="_blank" rel="noopener">Play it online</a> (Chrome or Edge)</li>
+        <li><a href="https://github.com/Dan007b/phase-escape" target="_blank" rel="noopener">GitHub repository</a></li>
+      </ul>
+    </div>
+
+    <a class="back-link" href="../index.html#projects"><span aria-hidden="true">&larr;</span> Back to projects</a>
+  </section>
+</main>
+
+<script src="../script.js?v=20260927"></script>
+</body>
+</html>
